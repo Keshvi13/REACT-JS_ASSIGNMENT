@@ -1,17 +1,27 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import Layout from './Layout';
+import Output from './Output';
+import { BrowserRouter,Routes,Route } from 'react-router-dom';
+import Printers from './Printers';
+import PrintersById_Delete from './PrintersById_Delete';
+import PrintersCreate from './PrintersCreate';
+import PrintersUpdate from './PrintersUpdate';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <BrowserRouter>
+  <Routes>
+    <Route path="/" element={<Layout />}>
+    <Route index element={<Output />}></Route>
+    <Route path="/footer" element={<Output />}></Route>
+    <Route path="/printers" element={<Printers />}></Route>
+    <Route path="/Printers/:id" element={<PrintersById_Delete />}></Route>
+    <Route path="/Printer/create" element={<PrintersCreate />}></Route>
+    <Route path="/Printers/update/:id" element={<PrintersUpdate/>}></Route>
+    </Route>
+  </Routes>
+  </BrowserRouter>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
